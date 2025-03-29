@@ -1,0 +1,104 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('https://plus.unsplash.com/premium_photo-1661456342021-faa4a2ac84f1?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZWR1Y2F0aW9uJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center/cover;
+}
+
+/* Register Page Styles */
+.register-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.register-form {
+    background: rgba(255, 255, 255, 0.8); /* More transparent white */
+    padding: 25px;
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(5px); /* Adds a slight blur effect to the background */
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 5px;
+    transition: border 0.3s;
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent white input fields */
+}
+
+.input-group input:focus {
+    border-color: #ff758c;
+    outline: none;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+    background: linear-gradient(135deg, #ff5f6d, #ff758c);
+    transform: translateY(-2px);
+}
+
+.signin-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3); /* Same pink shade as register */
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.signin-btn:hover {
+    background: linear-gradient(135deg, #ff5f6d, #ff758c);
+    transform: translateY(-2px);
+}
