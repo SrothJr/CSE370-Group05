@@ -1,3 +1,20 @@
+<?php
+// Database connection settings
+$servername = "localhost"; // Server name, usually "localhost"
+$username = "root";        // Your MySQL username (default for XAMPP is "root")
+$password = "";            // Your MySQL password (default for XAMPP is empty "")
+$dbname = "student_complaint_db"; // Your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+// Connection successful
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,23 +80,25 @@
         <p>Choose a category to sort complaints</p>
         
         <div class="categories">
-            <!-- Example category links -->
-            <a href="complaintPage.html?category=academic" class="category">
+            <!-- Category links, dynamically pass category in URL -->
+            <a href="complaintPage.php?category=academic" class="category">
                 <span>Academic</span>
             </a>
-            <a href="complaintPage.html?category=facilities" class="category">
+            <a href="complaintPage.php?category=facilities" class="category">
                 <span>Facilities</span>
             </a>
-            <a href="complaintPage.html?category=administration" class="category">
+            <a href="complaintPage.php?category=administration" class="category">
                 <span>Administration</span>
             </a>
-            <a href="complaintPage.html?category=student_services" class="category">
+            <a href="complaintPage.php?category=student_services" class="category">
                 <span>Student Services</span>
             </a>
-            <a href="complaintPage.html?category=others" class="category">
+            <a href="complaintPage.php?category=others" class="category">
                 <span>Others</span>
             </a>
         </div>
     </div>
 </body>
 </html>
+
+

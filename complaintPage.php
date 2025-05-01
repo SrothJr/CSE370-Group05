@@ -1,3 +1,33 @@
+<?php
+// --- Database connection (change credentials as needed) ---
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "student_complaint_db"; // 🔁 Change this
+
+$conn = new mysqli($host, $username, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// --- Handle form submission ---
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = $_POST["title"];
+    $description = $_POST["description"];
+    $category = $_POST["category"];
+
+    $stmt = $conn->prepare("INSERT INTO complaints (title, description, category) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $title, $description, $category);
+
+    if ($stmt->execute()) {
+        $success = "✅ Complaint submitted successfully!";
+    } else {
+        $error = "❌ Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +48,7 @@
             height: 100vh;
         }
         .container {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -49,40 +79,39 @@
         button:hover {
             background: #0056b3;
         }
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+            color: green;
+        }
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Submit a Complaint</h2>
         <p>Category: <span id="category-name"></span></p>
-        <form id="complaintForm">
-            <input type="text" id="title" placeholder="Complaint Title" required>
-            <textarea id="description" placeholder="Describe the issue" required></textarea>
+
+        <form id="complaintForm" method="POST">
+            <input type="text" id="title" name="title" placeholder="Complaint Title" required>
+            <textarea id="description" name="description" placeholder="Describe the issue" required></textarea>
+            <input type="hidden" id="category" name="category">
+
             <button type="submit">Submit</button>
         </form>
+
+        <?php if (isset($success)) echo "<div class='message'>$success</div>"; ?>
+        <?php if (isset($error)) echo "<div class='message error'>$error</div>"; ?>
     </div>
 
     <script>
-        // Get the category from the URL query parameter
+        // Get the category from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const category = urlParams.get('category');
-        
-        // Display the category name in the page
+        const category = urlParams.get('category') || "General";
+        document.getElementById('category').value = category;
         document.getElementById('category-name').textContent = category.charAt(0).toUpperCase() + category.slice(1);
-
-        // Handle form submission
-        document.getElementById("complaintForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            let title = document.getElementById("title").value;
-            let description = document.getElementById("description").value;
-            
-            if (title && description) {
-                alert(`Complaint submitted under the ${category} category`);
-                // Here, you can send the complaint to a server or save it to a database
-                document.getElementById("title").value = "";
-                document.getElementById("description").value = "";
-            }
-        });
     </script>
 </body>
 </html>
