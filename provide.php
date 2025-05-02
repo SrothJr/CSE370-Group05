@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/rStyle.css">
-    <title>Document</title>
+    <title>Provide Resources</title>
 </head>
 <body>
     <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
@@ -47,10 +47,10 @@
 
         try{
             mysqli_query($conn, $sql);
-            echo "Successfully Provided";
+            echo '<div class="message success">Successfully Provided</div>';
             }
             catch(mysqli_sql_exception) {
-                echo "Could not provide";
+                echo '<div class="message error">Could not provide</div>';
             }
 
 

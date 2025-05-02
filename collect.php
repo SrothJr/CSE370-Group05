@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/rStyle.css">
 
-    <title>Document</title>
+    <title>Collect Resources</title>
 </head>
 <body>
 <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
@@ -33,14 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
+        echo '<div class="resource-links">';
         $row = mysqli_fetch_assoc($result);
         echo '<a href="' . htmlspecialchars($row['books']) . '">Books</a>' . '<br>';
         echo '<a href="' . htmlspecialchars($row['lectures']) . '">Lectures</a>' . "<br>";
         echo '<a href="' . htmlspecialchars($row['videos']) . '">Videos</a>'. "<br>";
-
+        echo '</div>';
     }
     else {
-        echo "NO RESOURCES FOUND";
+        echo '<div class="message error">NO RESOURCES FOUND</div>';
     }
 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2025 at 03:17 PM
+-- Generation Time: May 02, 2025 at 06:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,6 +43,7 @@ INSERT INTO `resources` (`course_code`, `course_title`, `books`, `lectures`, `vi
 ('CSE110', 'Programming Language I', 'drive.com/CSE110/books', 'drive.com/CSE110/lectures', 'drive.com/CSE110/videos'),
 ('CSE111', 'Programming Language II', 'drive.com/CSE111/books', 'drive.com/CSE111/lectures', 'drive.com/CSE111/lectures'),
 ('CSE220', 'Data Structures', 'drive.com/CSE220/books', 'drive.com/CSE220/lectures', 'drive.com/CSE220/videos'),
+('cse221', 'Algorithms', 'drive.com/CSE221/books', 'drive.com/CSE221/lectures', 'drive.com/CSE221/videos'),
 ('CSE230', 'Discrete Mathematics', 'drive.com/CSE230/books', 'drive.com/CSE230/lectures', 'drive.com/CSE230/video');
 
 --
@@ -53,7 +54,8 @@ INSERT INTO `resources` (`course_code`, `course_title`, `books`, `lectures`, `vi
 -- Indexes for table `resources`
 --
 ALTER TABLE `resources`
-  ADD UNIQUE KEY `course_code` (`course_code`);
+  ADD UNIQUE KEY `course_code` (`course_code`),
+  ADD UNIQUE KEY `course_title` (`course_title`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
