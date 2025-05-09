@@ -1,5 +1,16 @@
 <?php
-    include("header.html");
+session_start();
+include 'database.php';
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+// check admin
+if ($_SESSION['isadmin']) {
+    include 'aheader.html';
+} else {
+    include 'uheader.html';
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +23,8 @@
 </head>
 <body>
     <div class="welcome-section">
-        <h1>Resource Hub</h1>
-        <p>Welcome to the Resource Hub. Choose an option below to manage your educational resources.</p>
+        <h1>Resource Vault</h1>
+        <p>Welcome to the Resource Vault. Choose an option below to collect or provide educational resources.</p>
     </div>
 
     <div class="button-container">

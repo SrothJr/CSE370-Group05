@@ -1,0 +1,78 @@
+/* Simple FAQ Styles - Modern design for Student Complaint System FAQs */
+/* Designed to work without JavaScript while maintaining compatibility with hStyle.css header */
+
+/* FAQ Page Container */
+.faq-page-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.faq-page-title {
+  color: #5b21b6;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* FAQ Container */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+/* Individual FAQ Item */
+.faq {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-left: 4px solid #5b21b6;
+}
+
+.faq:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.faq h3 {
+  background-color: #f9f7ff;
+  color: #5b21b6;
+  font-weight: 500;
+  padding: 18px 20px;
+  margin: 0;
+}
+
+.faq p {
+  padding: 18px 20px;
+  margin: 0;
+  color: #444;
+  line-height: 1.6;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faq-page-container {
+    padding: 0 15px;
+    margin: 20px auto;
+  }
+
+  .faq-page-title {
+    font-size: 1.5rem;
+  }
+
+  .faq h3 {
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  .faq p {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+}

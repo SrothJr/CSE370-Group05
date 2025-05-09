@@ -1,23 +1,17 @@
 <?php
+session_start();
 // --- Database connection (change credentials as needed) ---
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "student_complaint_db";
-
-$conn = new mysqli($host, $username, $password, $database);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include("database.php");
 
 // --- Handle form submission ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST["title"];
     $description = $_POST["description"];
     $category = $_POST["category"];
+    $user_id = $_SESSION['user_id'];
 
-    $stmt = $conn->prepare("INSERT INTO complaints (title, description, category) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $title, $description, $category);
+    $stmt = $conn->prepare("INSERT INTO complaints (title, description, category, user_id) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $title, $description, $category, $user_id);
 
     if ($stmt->execute()) {
         $success = "✅ Complaint submitted successfully!";

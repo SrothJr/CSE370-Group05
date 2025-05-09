@@ -1,18 +1,6 @@
 <?php
 // Database connection settings
-$servername = "localhost"; // Server name, usually "localhost"
-$username = "root";        // Your MySQL username (default for XAMPP is "root")
-$password = "";            // Your MySQL password (default for XAMPP is empty "")
-$dbname = "student_complaint_db"; // Your database name
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-// Connection successful
+include("database.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

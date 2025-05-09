@@ -1,0 +1,208 @@
+/* header-styles.css - Extracted header styles from hStyle.css */
+
+/* Import Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+/* Reset and Base Styles that affect header elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+  background-color: #ffffff;
+  padding: 15px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+header h1 {
+  color: #5b21b6; /* Vibrant purple */
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-right: 20px;
+}
+
+header h1 a {
+  color: #5b21b6;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header h1 a:hover {
+  color: #4c1d95;
+  text-decoration: none;
+}
+
+header nav {
+  flex-grow: 1;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+header nav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+header nav ul li a:hover {
+  background-color: #f3f4f6;
+  color: #5b21b6;
+}
+
+.header-text h1 {
+  color: #5b21b6; /* Vibrant purple */
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.header-text p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.search-container input {
+  padding: 10px 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px 0 0 8px;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.3s ease;
+  width: 250px;
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: #5b21b6;
+}
+
+.search-container button {
+  background-color: #5b21b6;
+  color: white;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+  background-color: #4c1d95;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-link {
+  color: #5b21b6;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: #f3f4f6;
+}
+
+.profile-link:hover {
+  background-color: #e0e7ff;
+  color: #4c1d95;
+}
+
+/* Responsive Header Design */
+@media (max-width: 992px) {
+  header nav {
+    flex-grow: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  header h1 {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  header nav ul {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  header nav ul li a {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .header-text {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .search-container {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
+
+  .profile-container {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-link {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  header nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header nav ul li {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  header nav ul li a {
+    display: block;
+    padding: 8px;
+  }
+}

@@ -7,10 +7,32 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// check admin
+if ($_SESSION['isadmin']) {
+    include 'adminHeader.php';
+} else {
+    include 'globalHeader.html';
+}
+
 // Initialize session variables
 $user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : ''; 
 $user_email = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ''; 
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $newPassword = trim($_POST['password']);
+
+    $new_hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("UPDATE users SET password = ? WHERE name = ? AND email = ?");
+    $stmt->bind_param("sss", $new_hashed_password, $user_name, $user_email);
+
+    if ($stmt->execute()) {
+        header("Location: logout.php");
+        exit();
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,13 +41,9 @@ $user_email = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Profile</title>
-    <link rel="stylesheet" href="css/profile.css"> <!-- Linking the CSS file -->
+    <link rel="stylesheet" href="css/hStyle.css"> <!-- Linking the CSS file -->
 </head>
 <body>
-    <header class="page-header">
-        <div class="header-title">Update Your Profile</div>
-        <a href="homepage.php" class="back-home-btn">Back to Homepage</a>
-    </header>
 
     <div class="profile-container">
         <h2>Update Your Profile Information</h2>
@@ -44,10 +62,10 @@ $user_email = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : '';
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter a new password (optional)">
+                <input type="password" id="password" name="password" placeholder="Enter a new password" required>
             </div>
 
-            <button type="submit">Update Profile</button>
+            <button type="submit">Change Password</button>
         </form>
     </div>
 </body>

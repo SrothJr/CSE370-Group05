@@ -1,12 +1,18 @@
 <?php
 session_start(); // Ensure session starts at the top of the page
 
-include 'config.php'; // Include the database connection file
+include 'database.php'; // Include the database connection file
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php"); // Redirect to login page if not logged in
     exit();
+}
+
+if ($_SESSION['isadmin']) {
+    include 'adminHeader.php';
+} else {
+    include 'globalHeader.html';
 }
 
 $user_id = $_SESSION['user_id']; // Retrieve the user's ID from the session
@@ -43,7 +49,8 @@ $params = [];
 $sql = "
     SELECT c.id, c.title, c.description, c.category, c.created_at,
         SUM(CASE WHEN v.vote_type = 'upvote' THEN 1 ELSE 0 END) AS upvotes,
-        SUM(CASE WHEN v.vote_type = 'downvote' THEN 1 ELSE 0 END) AS downvotes
+        SUM(CASE WHEN v.vote_type = 'downvote' THEN 1 ELSE 0 END) AS downvotes,
+        c.user_id
     FROM complaints c
     LEFT JOIN votes v ON c.id = v.complaint_id
 ";
@@ -66,8 +73,9 @@ $result = $stmt->get_result();
 ?>
 
 <header class="page-header">
+    
     <div class="header-title">Complaints</div>
-    <a href="homepage.php" class="back-home-btn">Back to Homepage</a>
+    <!-- <a href="homepage.php" class="back-home-btn">Back to Homepage</a> -->
 </header>
 
 <div style="text-align:center; margin-top: 20px;">
@@ -161,6 +169,19 @@ $result = $stmt->get_result();
             <p><?php echo nl2br(htmlspecialchars($row['description'])); ?></p>
             <p><strong>Category:</strong> <?php echo htmlspecialchars($row['category']); ?></p>
             <p><strong>Submitted:</strong> <?php echo $row['created_at']; ?></p>
+            <?php
+                if($_SESSION['isadmin']){
+                    $user = htmlspecialchars($row['user_id']);
+                    $sql2 = "SELECT id, name, email FROM users WHERE id=$user";
+                    
+                    $result2 = mysqli_query($conn, $sql2);
+                    $row2 = mysqli_fetch_assoc($result2);
+
+                    echo "<p><strong>User ID: </strong>" . htmlspecialchars($row2['id']) . "</p>";
+                    echo "<p><strong>User Name: </strong>" . htmlspecialchars($row2['name']) . "</p>";
+                    echo "<p><strong>User Email: </strong>" . htmlspecialchars($row2['email']) . "</p>";
+                }
+            ?>
             <form method="POST" class="vote-form">
                 <input type="hidden" name="complaint_id" value="<?php echo $row['id']; ?>">
                 <button type="submit" name="vote_type" value="upvote" class="upvote">👍 <?php echo $row['upvotes']; ?></button>

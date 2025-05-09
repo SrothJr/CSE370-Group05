@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-include('config.php'); // Include the database connection file
+include('database.php'); // Include the database connection file
 
 // Get the user ID from session
 $user_id = $_SESSION['user_id'];

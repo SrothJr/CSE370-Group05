@@ -1,17 +1,13 @@
 <?php
-// Database connection settings
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "student_complaint_db"; // Make sure this database exists!
-
-// Create connection
-$conn = new mysqli($host, $user, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+session_start();
+include("database.php");
+// check admin
+if ($_SESSION['isadmin']) {
+    include('adminHeader.php');
+} else {
+    header("Location: homepage.php");
 }
+
 
 // Handle status update
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'], $_POST['status'], $_POST['id'])) {
@@ -22,24 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'], $_POS
     $updateQuery = "UPDATE complaints SET status = '$status' WHERE id = $id";
     $conn->query($updateQuery);
 
-    // Try to update adminsee
-    $updateAdmin = $conn->query("UPDATE adminsee SET status = '$status' WHERE id = $id");
-
-    // If no row was updated in adminsee, insert it
-    if ($conn->affected_rows === 0) {
-        // Get complaint info
-        $result = $conn->query("SELECT * FROM complaints WHERE id = $id");
-        if ($result && $row = $result->fetch_assoc()) {
-            $title = $conn->real_escape_string($row['title']);
-            $desc = $conn->real_escape_string($row['description']);
-            $cat = $conn->real_escape_string($row['category']);
-            $created = $row['created_at'];
-
-            // Insert into adminsee if no corresponding row exists
-            $conn->query("INSERT INTO adminsee (id, title, description, category, status, created_at) 
-                          VALUES ($id, '$title', '$desc', '$cat', '$status', '$created')");
-        }
-    }
 }
 
 // Fetch all complaints
@@ -50,6 +28,7 @@ $result = $conn->query("SELECT * FROM complaints ORDER BY created_at DESC");
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="./css/headerStyles.css">   -->
     <title>Admin Panel - Complaint Management</title>
     <style>
         body {

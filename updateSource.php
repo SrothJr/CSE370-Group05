@@ -1,6 +1,12 @@
 <?php
-    include("header.html");
-    include("database.php");
+session_start();
+include("database.php");
+    // check admin
+if ($_SESSION['isadmin']) {
+    include 'aheader.html';
+} else {
+    header("Location: homepage.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +55,8 @@
                 Link of Video folder: <br>
                 <input type="text" name="videos" value="<?php echo htmlspecialchars($row['videos']); ?>" placeholder="Leave empty to keep current value"><br>
                 
-                <input type="submit" name="update" value="Update Resources"> <br>
+                <input type="submit" name="update" value="Update Resources">
+                <input type="submit" name="delete" value="Delete Resources"> <br>
             </form>
             <?php
         } else {
@@ -58,6 +65,19 @@
     }
 
     // Second step: Process the update
+    if (isset($_POST['delete']) && !empty($_POST['course_code'])) {
+        $course_code = filter_input(INPUT_POST, "course_code", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $sql = "DELETE FROM resources WHERE course_code = '$course_code'";
+
+        try{
+            mysqli_query($conn, $sql);
+            echo '<div class="message success">Course resources deleted successfully!</div>';
+            }
+            catch(mysqli_sql_exception) {
+                echo '<div class="message error">Could not delete course resources</div>';
+            }
+    }
     if (isset($_POST['update']) && !empty($_POST['course_code'])) {
         // Get the course code from the hidden field
         $course_code = filter_input(INPUT_POST, "course_code", FILTER_SANITIZE_SPECIAL_CHARS);

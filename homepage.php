@@ -1,6 +1,7 @@
 <?php
 session_start();
-include 'config.php'; 
+include 'database.php'; 
+
 
 
 // Check if the user is logged in
@@ -9,29 +10,11 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Default content
-$page = isset($_GET['page']) ? $_GET['page'] : 'home'; // Default to 'home' if no page is specified
-
-// Include content based on the 'page' parameter
-switch ($page) {
-    case 'categorizeComplaints':
-        include 'categorizeComplaints.php';  // Include Create Complaint page
-        break;
-    case 'complaints':
-        include 'complaints.php';  // Include Complaints page
-        break;
-    case 'course_reviews':
-        include 'course_reviews.php';  // Include Course Reviews page
-        break;
-	case 'resources':
-        include 'resources.php';  // Include Complaints page
-        break;
-    case 'updates':
-        include 'updates.php';  // Include Updates page
-        break;
-    case 'faqs':
-        include 'faqs.php';  // Include FAQs page
-        break;
+// check admin
+if ($_SESSION['isadmin']) {
+    include 'adminHeader.php';
+} else {
+    include 'globalHeader.html';
 }
 
 ?>
@@ -41,16 +24,15 @@ switch ($page) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/homepage.css">      
+    <link rel="stylesheet" href="./css/hStyle.css">      
     
 </head>
 <body>
-    <header>
-	    <div class="header-text">
-        <h1>Welcome to the Student Complaint System</h1>
-        <p>Choose an option from the sidebar to get started.</p>
+	    <div class="header-text" style="width: 500px; margin: 10px auto;">
+        <h2>Welcome to the Student Help Desk</h2>
+        <p>Navigate through website to find use features!</p>
         </div>
-        <div class="search-container">
+        <div class="search-container" style="width: 500px; margin: 0 auto;">
             <input type="text" placeholder="Search..." id="search-bar">
             <button>🔍</button>
         </div>
@@ -58,23 +40,6 @@ switch ($page) {
         <div class="profile-container">
             <a href="profile.php" class="profile-link">Profile</a>
         </div>
-    </header>
-    <div class="dashboard-container">
-        <nav class="sidebar">
-            <h2>Student Complaint System</h2>
-            <ul>
-			    
-                <li><a href="homepage.php?page=categorizeComplaints">Create Complaints</a></li>
-                <li><a href="homepage.php?page=complaints">Complaints</a></li>
-                <li><a href="homepage.php?page=course_reviews">Course Reviews</a></li>
-				<li><a href="homepage.php?page=resources">Resources</a></li>
-                <li><a href="homepage.php?page=updates">Updates</a></li>
-                <li><a href="homepage.php?page=faqs">FAQs</a></li>
-                <li><a href="logout.php" class="logout-btn">Logout</a></li>
-				
-
-            </ul>
-        </nav>
 		
         
         <div class="content">

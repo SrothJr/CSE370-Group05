@@ -34,6 +34,13 @@ header h1 {
   color: #5b21b6; /* Vibrant purple */
   font-weight: 600;
 }
+header h1 a,
+header h1 a:hover,
+header h1 a:visited,
+header h1 a:active {
+  text-decoration: none;
+  color: #5a21b65d; /* change the purple color */
+}
 
 nav ul {
   display: flex;
