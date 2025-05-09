@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
     <div class="profile-container">
-        <h2>Update Your Profile Information</h2>
+        <h2>Change your password</h2>
 
         <!-- Profile Update Form -->
         <form method="POST" action="profile_update.php">
