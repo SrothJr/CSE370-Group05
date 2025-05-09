@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 
 --
 -- Database: `student_complaint_db`
+--
 
 -- --------------------------------------------------------
 
@@ -85,15 +86,6 @@ CREATE TABLE `course_reviews` (
   `comment` text DEFAULT NULL,
   `review_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `course_reviews`
---
-
-INSERT INTO `course_reviews` (`id`, `user_id`, `course_code`, `course_title`, `rating`, `comment`, `review_date`) VALUES
-(1, 1, 'CSE110', NULL, 4, 'Nice', '2025-05-02 17:51:33'),
-(2, 1, 'CSE220', NULL, 3, 'Too hard!!!', '2025-05-02 19:17:24'),
-(3, 1, 'CSE111', NULL, 3, "It's okay", '2025-05-02 19:43:08');
 
 -- --------------------------------------------------------
 
@@ -189,6 +181,12 @@ INSERT INTO `votes` (`id`, `complaint_id`, `user_id`, `vote_type`) VALUES
 --
 
 --
+-- Indexes for table `adminsee`
+--
+ALTER TABLE `adminsee`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `complaints`
 --
 ALTER TABLE `complaints`
@@ -236,6 +234,12 @@ ALTER TABLE `votes`
 
 --
 -- AUTO_INCREMENT for dumped tables
+
+--
+-- AUTO_INCREMENT for table `adminsee`
+--
+ALTER TABLE `adminsee`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `complaints`

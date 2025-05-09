@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 session_start();
 include("database.php");
 // check admin
@@ -6,18 +7,46 @@ if ($_SESSION['isadmin']) {
     include('adminHeader.php');
 } else {
     header("Location: homepage.php");
+=======
+$host = "localhost";
+$user = "root";
+$password = "";
+$database = "student_complaint_db";
+
+$conn = new mysqli($host, $user, $password, $database);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+>>>>>>> 29c1bc652b58f2bc66e8c6763f1d634fd689de85
 }
 
 
 // Handle status update
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'], $_POST['status'], $_POST['id'])) {
-    $id = intval($_POST['id']);
-    $status = $_POST['status'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['update_status'])) {
+        $id = $_POST['id'];
+        $status = $_POST['status'];
 
-    // Update complaints table
-    $updateQuery = "UPDATE complaints SET status = '$status' WHERE id = $id";
-    $conn->query($updateQuery);
+        $updateQuery = "UPDATE complaints SET status = ? WHERE id = ?";
+        $stmt = $conn->prepare($updateQuery);
+        $stmt->bind_param("si", $status, $id);
+        $stmt->execute();
+        $stmt->close();
+    }
 
+<<<<<<< HEAD
+=======
+    // Handle delete complaint
+    if (isset($_POST['delete_complaint'])) {
+        $id = $_POST['id'];
+
+        $deleteQuery = "DELETE FROM complaints WHERE id = ?";
+        $stmt = $conn->prepare($deleteQuery);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+>>>>>>> 29c1bc652b58f2bc66e8c6763f1d634fd689de85
 }
 
 // Fetch all complaints
@@ -101,6 +130,10 @@ $result = $conn->query("SELECT * FROM complaints ORDER BY created_at DESC");
             background-color: #00e6b0;
         }
 
+        form.inline {
+            display: inline;
+        }
+
         @media (max-width: 768px) {
             th, td {
                 font-size: 0.9em;
@@ -125,7 +158,7 @@ $result = $conn->query("SELECT * FROM complaints ORDER BY created_at DESC");
             <th>Category</th>
             <th>Status</th>
             <th>Created At</th>
-            <th>Action</th>
+            <th>Actions</th>
         </tr>
 
         <?php while ($row = $result->fetch_assoc()) { ?>
@@ -137,7 +170,8 @@ $result = $conn->query("SELECT * FROM complaints ORDER BY created_at DESC");
                 <td><?= $row['status']; ?></td>
                 <td><?= $row['created_at']; ?></td>
                 <td>
-                    <form method="POST">
+                    <!-- Update form -->
+                    <form method="POST" class="inline">
                         <input type="hidden" name="id" value="<?= $row['id']; ?>">
                         <select name="status">
                             <option value="Pending" <?= $row['status'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
@@ -145,6 +179,12 @@ $result = $conn->query("SELECT * FROM complaints ORDER BY created_at DESC");
                             <option value="Rejected" <?= $row['status'] === 'Rejected' ? 'selected' : '' ?>>Rejected</option>
                         </select>
                         <button type="submit" name="update_status">Update</button>
+                    </form>
+
+                    <!-- Delete form -->
+                    <form method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this complaint?');">
+                        <input type="hidden" name="id" value="<?= $row['id']; ?>">
+                        <button type="submit" name="delete_complaint" style="background-color: #ff4d4d; color: white;">Delete</button>
                     </form>
                 </td>
             </tr>
