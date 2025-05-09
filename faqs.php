@@ -4,6 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+include 'database.php';
+
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -25,37 +27,59 @@ if ($_SESSION['isadmin']) {
     <title>FAQs - Student Complaint System</title>
 </head>
 <body>
+<?php
+    if ($_SESSION['isadmin']) {
 
-<div class="faq-page-container">
+?>
+
+<form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post" style="margin-top: 30px;">
+        <h2>Add Frequently Asked Questions</h2>
+        Question: <br>
+        <input type="text" name="question" required> <br>
+        Answer: <br>
+        <input type="text" name="answer" required> <br>
+        <input type="submit" name="submit" value="submit"> <br>
+
+
+    </form>
+<?php 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $question = filter_input(INPUT_POST, "question", FILTER_SANITIZE_SPECIAL_CHARS);
+    $answer = filter_input(INPUT_POST, "answer", FILTER_SANITIZE_SPECIAL_CHARS);
+
+    $sql = "INSERT INTO faqs (question, answer) VALUES ('$question', '$answer')";
+    
+    try{
+        mysqli_query($conn, $sql);
+        echo '<div class="message success">Successfully Added FAQ</div>';
+        }
+        catch(mysqli_sql_exception) {
+            echo '<div class="message error">Could not Add FAQ</div>';
+        }
+}
+    }
+?>
+
+
+<?php
+
+    $all = "SELECT * FROM faqs";
+    $result = mysqli_query($conn, $all);
+    
+    echo '<div class="faq-page-container">
     <h1 class="faq-page-title">Frequently Asked Questions</h1>
+    <div class="faq-container">';
+    
+    while ($row = mysqli_fetch_assoc($result)){
+        echo '<div class="faq">
+            <h3>' . htmlspecialchars($row['question']) . '</h3>
+            <p>' . htmlspecialchars($row['answer']) . '</p>
+        </div>';
+    }
+    echo '</div></div>';
 
-    <div class="faq-container">
-        <div class="faq">
-            <h3>How do I submit a complaint?</h3>
-            <p>You can submit a complaint by clicking on the "Create Complaints" option in the sidebar and filling out the complaint form.</p>
-        </div>
-
-        <div class="faq">
-            <h3>Can I edit my complaint after submission?</h3>
-            <p>No, currently, complaints cannot be edited after submission. Please make sure to review your complaint before submitting.</p>
-        </div>
-
-        <div class="faq">
-            <h3>How does the voting system work?</h3>
-            <p>Users can upvote or downvote complaints. This helps in prioritizing issues that require urgent attention.</p>
-        </div>
-
-        <div class="faq">
-            <h3>How do I know my complaint has been resolved?</h3>
-            <p>Check Updates for any improvements, a mail will be sent to the user of the complaint.</p>
-        </div>
-
-        <div class="faq">
-            <h3>Is my complaint anonymous?</h3>
-            <p>No, complaints are linked to your student ID. However, your identity is only visible to the administrative staff.</p>
-        </div>
-    </div>
-</div>
+?>
 
 </body>
 </html>

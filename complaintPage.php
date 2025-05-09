@@ -1,7 +1,11 @@
 <?php
 session_start();
-// --- Database connection (change credentials as needed) ---
 include("database.php");
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 
 // --- Handle form submission ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

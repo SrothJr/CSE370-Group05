@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 session_start();
 include("database.php");
 // check admin
@@ -7,17 +6,6 @@ if ($_SESSION['isadmin']) {
     include('adminHeader.php');
 } else {
     header("Location: homepage.php");
-=======
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "student_complaint_db";
-
-$conn = new mysqli($host, $user, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
->>>>>>> 29c1bc652b58f2bc66e8c6763f1d634fd689de85
 }
 
 
@@ -34,8 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 
-<<<<<<< HEAD
-=======
     // Handle delete complaint
     if (isset($_POST['delete_complaint'])) {
         $id = $_POST['id'];
@@ -46,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $stmt->close();
     }
->>>>>>> 29c1bc652b58f2bc66e8c6763f1d634fd689de85
 }
 
 // Fetch all complaints
