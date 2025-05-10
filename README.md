@@ -1,5 +1,5 @@
 # Student Help Desk
-Introduction
+[[Introduction]]
 
 The Student Help Desk is a user-friendly web platform designed to improve student and academic administration communication. It helps students to easily submit and track complaints and allows the university to handle them in an organized and efficient manner. Furthermore, it keeps a vault of relevant academic resources corresponding to the needs of academic coursework. The system also includes key features like writing course reviews and providing an FAQ section, all aimed at making students’ academic experience better. The platform is built using HTML and CSS for the front-end, and PHP and MySQL for the back-end, ensuring smooth interaction between users and the system. The database structure is designed using an Enhanced Entity-Relationship (EER) diagram, which maps out how students, complaints, reviews, and administrators are all connected, making it easier to manage and expand the system in the future. With its focus on simplicity, accessibility, and organization, the system ensures that student concerns are heard and resolved quickly, while also being scalable enough to adapt to future needs.
 
