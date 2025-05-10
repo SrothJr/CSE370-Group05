@@ -1,7 +1,7 @@
 # Student Help Desk
 ## Introduction
 
-The **Student Help Desk** is a user-friendly web platform designed to improve student and academic administration communication. It helps students to easily submit and track complaints and allows the university to handle them in an organized and efficient manner. Furthermore, it keeps a vault of relevant academic resources corresponding to the needs of academic coursework. The system also includes key features like writing course reviews and providing an FAQ section, all aimed at making students’ academic experience better. The platform is built using HTML and CSS for the front-end, and PHP and MySQL for the back-end, ensuring smooth interaction between users and the system. The database structure is designed using an Enhanced Entity-Relationship (EER) diagram, which maps out how students, complaints, reviews, and administrators are all connected, making it easier to manage and expand the system in the future. With its focus on simplicity, accessibility, and organization, the system ensures that student concerns are heard and resolved quickly, while also being scalable enough to adapt to future needs.
+The **Student Help Desk** is a user-friendly web platform designed to improve student and academic administration communication. It helps students to easily submit and track complaints and allows the university to handle them in an organized and efficient manner. Furthermore, it keeps a vault of relevant academic resources corresponding to the needs of academic coursework. The system also includes key features like writing course reviews and providing an FAQ section, all aimed at making students’ academic experience better. The platform is built using **HTML** and **CSS** for the front-end, and **PHP** and **MySQL** for the back-end, ensuring smooth interaction between users and the system. The database structure is designed using an Enhanced Entity-Relationship (EER) diagram, which maps out how students, complaints, reviews, and administrators are all connected, making it easier to manage and expand the system in the future. With its focus on simplicity, accessibility, and organization, the system ensures that student concerns are heard and resolved quickly, while also being scalable enough to adapt to future needs.
 
 ## Project Features 
 
@@ -62,3 +62,21 @@ The voting feature allows students(users) to upvote or downvote certain complain
 
 - Students can vote on complaints, indicating how many others face the same issue, helping prioritize resolution.
 
+
+## Back-end Structure
+
+### EER Diagram
+
+![image](https://github.com/user-attachments/assets/106c8aa0-2244-4a53-833b-c3566405fd80)
+
+### Schema Diagram
+
+![image](https://github.com/user-attachments/assets/602fa4b7-ff94-404f-9f2e-48ea22e1b48a)
+
+### How to source this Project?
+
+1. Clone the project using [https://github.com/SrothJr/CSE370-Group05.git](https://github.com/SrothJr/CSE370-Group05.git) into your XAMPP/htdocs folder.
+2. Launch XAMPP, start Apache and MySQL Module.
+3. Create a database named "group5" in your MySQL Data server.
+4. Locate the group5.sql file in your repository and import it into the created database.
+5. On a different tab of your browser, goto to `localhost/CSE370-Group05/login.php` to get started!
