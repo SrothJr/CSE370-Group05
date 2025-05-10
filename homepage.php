@@ -25,7 +25,7 @@ if ($_SESSION['isadmin']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/hStyle.css">      
-    
+    <title>Home Page</title>
 </head>
 <body>
 	    <div class="header-text" style="width: 500px; margin: 10px auto;">
