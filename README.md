@@ -7,7 +7,7 @@ The **Student Help Desk** is a user-friendly web platform designed to improve st
 
 The key features of the Student Help Desk include:
 
-## User Module
+### User Module
 
 
 - Two main types of users: Students(users) and Admins.
